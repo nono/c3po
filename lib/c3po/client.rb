@@ -2,8 +2,6 @@
 class C3po
   module Client
 
-    attr_accessor :request
-
     # Query a web service.
     #
     # Returns a translated string or an array of errors.
