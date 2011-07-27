@@ -16,18 +16,39 @@ describe C3po do
         end
       end
 
-      describe 'request' do
+      describe 'request a translation' do
+        let(:uri) {'https://www.googleapis.com/language/translate/v2'}
         let(:translator) {C3po.new('to be translated')}
         let(:json_response) {File.open(file_path('multiple.json')).read}
         let(:query) {{:key=>"MYAPIKEY", :q=>"to be translated", :source=>"fr", :target=>"en"}}
 
         before do
-          request_helper(translator, query, json_response)
+          request_helper(uri, query, json_response)
           translator.translate(:fr, :en)
         end
 
         it 'should translate string' do
           translator.result.should eq('Hallo Welt')
+        end
+
+        it 'should have ne errors' do
+          translator.errors.should be_empty
+        end
+      end
+
+      describe 'request a detection' do
+        let(:uri) {'https://www.googleapis.com/language/translate/v2/detect'}
+        let(:translator) {C3po.new('to be translated')}
+        let(:json_response) {File.open(file_path('auto_detect.json')).read}
+        let(:query) {{:key=>"MYAPIKEY", :q=>"to be translated"}}
+
+        before do
+          request_helper(uri, query, json_response)
+          translator.is
+        end
+
+        it 'should detect string' do
+          translator.result.should eq('en')
         end
 
         it 'should have ne errors' do
@@ -45,22 +66,39 @@ describe C3po do
         end
       end
 
-      describe 'request' do
+      describe 'request a translation' do
+        let(:uri) {'http://api.microsofttranslator.com/V2/Http.svc/Translate'}
         let(:translator) {C3po.new('to be translated')}
         let(:xml_response) {File.open(file_path('bing.xml')).read}
         let(:bing_query) {{:appId=>"MYAPIKEY", :text=>"to be translated", :from=>"fr", :to=>"en"}}
 
         before do
-          C3po.configure do |config|
-            config.provider = :bing
-            config.bing_api_key = 'MYAPIKEY'
-          end
-          request_helper(translator, bing_query, xml_response)
+          request_helper(uri, bing_query, xml_response)
           translator.translate(:fr, :en)
         end
 
         it 'should translate string' do
           translator.result.should eq("J'aime le café")
+        end
+
+        it 'should have ne errors' do
+          translator.errors.should be_empty
+        end
+      end
+
+      describe 'request a detection' do
+        let(:uri) {'http://api.microsofttranslator.com/V2/Http.svc/Detect'}
+        let(:translator) {C3po.new('to be translated')}
+        let(:json_response) {File.open(file_path('auto_detect.xml')).read}
+        let(:query) {{:appId=>"MYAPIKEY", :text=>"to be translated"}}
+
+        before do
+          request_helper(uri, query, json_response)
+          translator.is
+        end
+
+        it 'should detect string' do
+          translator.result.should eq('en')
         end
 
         it 'should have ne errors' do

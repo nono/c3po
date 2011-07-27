@@ -30,6 +30,7 @@ class C3po
     # @since 0.0.1
     #
     def is
+      fetch @adaptor.build_detect_query
     end
 
     # Check language.

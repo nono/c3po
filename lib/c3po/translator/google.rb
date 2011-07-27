@@ -8,7 +8,6 @@ class C3po
 
       def initialize(to_be_translated)
         @to_be_translated = to_be_translated
-        @base_url = 'https://www.googleapis.com/language/translate/v2'
       end
 
       # Build a query for Google Translate api.
@@ -24,11 +23,29 @@ class C3po
       # @since 0.0.1
       #
       def build_query(from, to)
+        @base_url = 'https://www.googleapis.com/language/translate/v2'
         {
           :key => C3po::Translator::Configuration.google_api_key,
           :q => @to_be_translated,
           :source => from.to_s,
           :target => to.to_s
+        }
+      end
+
+      # Build a query for detect method of Google Translate api.
+      #
+      # @exemple :
+      #   build_detect_query
+      #
+      # @return [Hash] Hash of params.
+      #
+      # @since 0.0.1
+      #
+      def build_detect_query
+        @base_url = 'https://www.googleapis.com/language/translate/v2/detect'
+        {
+          :key => C3po::Translator::Configuration.google_api_key,
+          :q => @to_be_translated
         }
       end
 
@@ -44,7 +61,12 @@ class C3po
       # @since 0.0.1
       #
       def parse(response)
-        Yajl::Parser.parse(response)['data']['translations'][0]['translatedText']
+        data = Yajl::Parser.parse(response)['data']
+        if data['translations']
+          data['translations'][0]['translatedText']
+        elsif data['detections']
+          data['detections'][0][0]["language"]
+        end
       end
 
     end #Google

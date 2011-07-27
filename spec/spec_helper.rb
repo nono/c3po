@@ -8,8 +8,8 @@ def file_path( *paths )
   File.expand_path(File.join(File.dirname(__FILE__), 'fixtures', *paths))
 end
 
-def request_helper(translator, query, body)
-  request = Typhoeus::Request.new translator.adaptor.base_url, :params => query
+def request_helper(uri, query, body)
+  request = Typhoeus::Request.new uri, :params => query
   hydra = Typhoeus::Hydra.hydra
   response = Typhoeus::Response.new(:code => 200, :headers => "", :body => body, :time => 0.3)
   hydra.stub(:get, request.url).and_return(response)
