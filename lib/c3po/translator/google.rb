@@ -8,6 +8,9 @@ class C3po
 
       def initialize(to_be_translated)
         @to_be_translated = to_be_translated
+        @default = {
+          :key => C3po::Translator::Configuration.google_api_key
+        }
       end
 
       # Build a query for Google Translate api.
@@ -24,12 +27,10 @@ class C3po
       #
       def build_query(from, to)
         @base_url = 'https://www.googleapis.com/language/translate/v2'
-        {
-          :key => C3po::Translator::Configuration.google_api_key,
-          :q => @to_be_translated,
-          :source => from.to_s,
-          :target => to.to_s
-        }
+        @default.merge({:q => @to_be_translated,
+                        :source => from.to_s,
+                        :target => to.to_s
+                      })
       end
 
       # Build a query for detect method of Google Translate api.
@@ -43,10 +44,7 @@ class C3po
       #
       def build_detect_query
         @base_url = 'https://www.googleapis.com/language/translate/v2/detect'
-        {
-          :key => C3po::Translator::Configuration.google_api_key,
-          :q => @to_be_translated
-        }
+        @default.merge({:q => @to_be_translated})
       end
 
       # Parse json response from Google webservice.

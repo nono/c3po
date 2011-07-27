@@ -8,6 +8,9 @@ class C3po
 
       def initialize(to_be_translated)
         @to_be_translated = to_be_translated
+        @default = {
+          :appId => C3po::Translator::Configuration.bing_api_key,
+        }
       end
 
       # Build a query for the Bing Translate api.
@@ -24,12 +27,10 @@ class C3po
       #
       def build_query(from, to)
         @base_url = 'http://api.microsofttranslator.com/V2/Http.svc/Translate'
-        {
-          :appId => C3po::Translator::Configuration.bing_api_key,
-          :text => @to_be_translated,
-          :from => from.to_s,
-          :to => to.to_s
-        }
+        @default.merge({:text => @to_be_translated,
+                        :from => from.to_s,
+                        :to => to.to_s
+                      })
       end
 
       # Build a query for detect method of Bing Translate api.
@@ -43,10 +44,7 @@ class C3po
       #
       def build_detect_query
         @base_url = 'http://api.microsofttranslator.com/V2/Http.svc/Detect'
-        {
-          :appId => C3po::Translator::Configuration.bing_api_key,
-          :text => @to_be_translated
-        }
+        @default.merge({:text => @to_be_translated})
       end
 
       # Parse xml response from Bing webservice.
