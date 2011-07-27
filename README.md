@@ -58,7 +58,6 @@ translator.is?(:de) # => false
 Todo
 ----
 
-* Bing adaptor
 * Exceptions
 * More specs
 
