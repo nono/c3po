@@ -58,6 +58,7 @@ translator.is?(:de) # => false
 Todo
 ----
 
+* Use Struct
 * Exceptions
 * More specs
 
