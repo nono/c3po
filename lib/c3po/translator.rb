@@ -46,7 +46,7 @@ class C3po
     # @since 0.0.1
     #
     def is?(language)
-      language == is
+      language.to_s == is
     end
 
   end #Translator

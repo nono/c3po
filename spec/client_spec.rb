@@ -31,7 +31,7 @@ describe C3po do
           translator.result.should eq('Hallo Welt')
         end
 
-        it 'should have ne errors' do
+        it 'should have no errors' do
           translator.errors.should be_empty
         end
       end
@@ -51,7 +51,30 @@ describe C3po do
           translator.result.should eq('en')
         end
 
-        it 'should have ne errors' do
+        it 'should have no errors' do
+          translator.errors.should be_empty
+        end
+      end
+
+      describe 'request a detection matcher' do
+        let(:uri) {'https://www.googleapis.com/language/translate/v2/detect'}
+        let(:translator) {C3po.new('to be translated')}
+        let(:json_response) {File.open(file_path('auto_detect.json')).read}
+        let(:query) {{:key=>"MYAPIKEY", :q=>"to be translated"}}
+
+        before do
+          request_helper(uri, query, json_response)
+        end
+
+        it 'should detect string' do
+          translator.is?(:en).should be_true
+        end
+
+        it 'should not detect string' do
+          translator.is?(:fr).should be_false
+        end
+
+        it 'should have no errors' do
           translator.errors.should be_empty
         end
       end
@@ -81,7 +104,7 @@ describe C3po do
           translator.result.should eq("J'aime le café")
         end
 
-        it 'should have ne errors' do
+        it 'should have no errors' do
           translator.errors.should be_empty
         end
       end
@@ -101,7 +124,30 @@ describe C3po do
           translator.result.should eq('en')
         end
 
-        it 'should have ne errors' do
+        it 'should have no errors' do
+          translator.errors.should be_empty
+        end
+      end
+
+      describe 'request a detection matcher' do
+        let(:uri) {'http://api.microsofttranslator.com/V2/Http.svc/Detect'}
+        let(:translator) {C3po.new('to be translated')}
+        let(:json_response) {File.open(file_path('auto_detect.xml')).read}
+        let(:query) {{:appId=>"MYAPIKEY", :text=>"to be translated"}}
+
+        before do
+          request_helper(uri, query, json_response)
+        end
+
+        it 'should detect string' do
+          translator.is?(:en).should be_true
+        end
+
+        it 'should not detect string' do
+          translator.is?(:fr).should be_false
+        end
+
+        it 'should have no errors' do
           translator.errors.should be_empty
         end
       end
