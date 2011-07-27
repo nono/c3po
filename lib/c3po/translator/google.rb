@@ -4,7 +4,7 @@ class C3po
     module Google
       BASE_URL = 'https://www.googleapis.com/language/translate/v2'
 
-      # Build a query from Google Translate api.
+      # Build a query for Google Translate api.
       #
       # @exemple :
       #   build_query :fr, :en
