@@ -6,7 +6,7 @@ class C3po
 
       class << self
 
-        attr_accessor :provider, :google_api_key
+        attr_accessor :provider, :google_api_key, :bing_api_key
 
         # Define a configure block.
         #

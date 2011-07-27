@@ -30,5 +30,29 @@ describe C3po do
         translator.errors.should be_empty
       end
     end
+
+    context 'Bing adapter' do
+
+      let(:translator) {C3po.new('to be translated')}
+      let(:xml_response) {File.open(file_path('bing.xml')).read}
+      let(:query) {{:appId=>"MYAPIKEY", :text=>"to be translated", :from=>"fr", :to=>"en"}}
+
+      before do
+        C3po.configure do |config|
+          config.provider = :bing
+          config.bing_api_key = 'MYAPIKEY'
+        end
+        request_helper(translator, query, xml_response)
+        translator.translate(:fr, :en)
+      end
+
+      it 'should translate string' do
+        translator.result.should eq('Hallo Welt')
+      end
+
+      it 'should have ne errors' do
+        translator.errors.should be_empty
+      end
+    end
   end
 end

@@ -13,5 +13,6 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.8.3}
   s.add_development_dependency "rspec", "~>2.6"
   s.add_dependency "typhoeus", "~>0.2.4"
+  s.add_dependency "nokogiri", "~>1.5.0"
   s.add_dependency "yajl-ruby", "~>0.8.2"
 end
