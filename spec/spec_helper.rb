@@ -9,7 +9,7 @@ def file_path( *paths )
 end
 
 def request_helper(translator, query, body)
-  request = Typhoeus::Request.new translator.base, :params => query
+  request = Typhoeus::Request.new translator.adaptor.base_url, :params => query
   hydra = Typhoeus::Hydra.hydra
   response = Typhoeus::Response.new(:code => 200, :headers => "", :body => body, :time => 0.3)
   hydra.stub(:get, request.url).and_return(response)

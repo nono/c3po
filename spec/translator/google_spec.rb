@@ -13,10 +13,10 @@ describe C3po::Translator::Google do
   end
 
   it 'should build a query hash' do
-    translator.build_query(:fr, :en).should eq({:key=>"MYAPIKEY", :q=>"to be translated", :source=>'fr', :target=> 'en'})
+    translator.adaptor.build_query(:fr, :en).should eq({:key=>"MYAPIKEY", :q=>"to be translated", :source=>'fr', :target=> 'en'})
   end
 
   it 'should read json response' do
-    translator.parse(json_response).should eq('Hallo Welt')
+    translator.adaptor.parse(json_response).should eq('Hallo Welt')
   end
 end

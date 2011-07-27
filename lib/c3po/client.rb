@@ -1,4 +1,6 @@
 # encoding: utf-8
+require 'typhoeus'
+
 class C3po
   module Client
 
@@ -19,12 +21,12 @@ class C3po
     # @since 0.0.1
     #
     def fetch(query)
-      request = Typhoeus::Request.new @base, :params => query
+      request = Typhoeus::Request.new @adaptor.base_url, :params => query
 
       request.on_complete do |response|
         if response.success?
           begin
-            @result = parse response.body
+            @result = @adaptor.parse response.body
           rescue
             @errors << 'Invalid response'
           end

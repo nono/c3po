@@ -13,11 +13,11 @@ describe C3po::Translator::Bing do
   end
 
   it 'should build a query hash' do
-    translator.build_query(:fr, :en).should eq({:appId=>"BINGAPIKEY", :text=>"to be translated", :from=>'fr', :to=> 'en'})
+    translator.adaptor.build_query(:fr, :en).should eq({:appId=>"BINGAPIKEY", :text=>"to be translated", :from=>'fr', :to=> 'en'})
   end
 
   it 'should read xml response' do
-    translator.parse(xml_response).should eq("J'aime le café")
+    translator.adaptor.parse(xml_response).should eq("J'aime le café")
   end
 end
 

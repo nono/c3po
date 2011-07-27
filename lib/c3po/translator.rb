@@ -16,7 +16,7 @@ class C3po
     # @since 0.0.1
     #
     def translate(from, to)
-      fetch build_query(from, to)
+      fetch @adaptor.build_query(from, to)
     end
 
     # Identify language.

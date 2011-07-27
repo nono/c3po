@@ -1,7 +1,4 @@
 # encoding: utf-8
-require 'typhoeus'
-require 'yajl'
-
 class C3po
 
   autoload :Translator,      'c3po/translator'
@@ -16,7 +13,7 @@ class C3po
   include Client
   include C3po::Translator
 
-  attr_accessor :base, :to_be_translated, :errors, :result
+  attr_accessor :base_url, :to_be_translated, :errors, :result, :adaptor
 
   # Define a translator object.
   #
@@ -29,13 +26,15 @@ class C3po
   # @since 0.0.1
   #
   def initialize(to_be_translated = nil)
-    select_provider
     @to_be_translated = to_be_translated
-    @base = BASE_URL
+    select_provider
+    @base_url = self.class.base_url
     @errors = []
   end
 
   class << self
+
+    attr_accessor :base_url
 
     # Define a configure block.
     #
@@ -65,9 +64,9 @@ class C3po
   def select_provider
     case C3po::Translator::Configuration.provider
     when :google
-      self.class.send :include, Google
+      @adaptor = Google.new @to_be_translated
     when :bing
-      self.class.send :include, Bing
+      @adaptor = Bing.new @to_be_translated
     end
   end
 

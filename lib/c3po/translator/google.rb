@@ -1,8 +1,15 @@
 # encoding: utf-8
+require 'yajl'
+
 class C3po
   module Translator
-    module Google
-      BASE_URL = 'https://www.googleapis.com/language/translate/v2'
+    class Google
+      attr_accessor :base_url
+
+      def initialize(to_be_translated)
+        @to_be_translated = to_be_translated
+        @base_url = 'https://www.googleapis.com/language/translate/v2'
+      end
 
       # Build a query for Google Translate api.
       #

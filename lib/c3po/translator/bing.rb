@@ -3,8 +3,13 @@ require 'nokogiri'
 
 class C3po
   module Translator
-    module Bing
-      BASE_URL = 'http://api.microsofttranslator.com/V2/Http.svc/Translate'
+    class Bing
+      attr_accessor :base_url
+
+      def initialize(to_be_translated)
+        @to_be_translated = to_be_translated
+        @base_url = 'http://api.microsofttranslator.com/V2/Http.svc/Translate'
+      end
 
       # Build a query for the Bing Translate api.
       #
