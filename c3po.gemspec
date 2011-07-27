@@ -2,8 +2,7 @@ Gem::Specification.new do |s|
   s.name             = "c3po"
   s.version          = "0.1.0"
   s.date             = Time.now.utc.strftime("%Y-%m-%d")
-  s.homepage         = "http://github.com/chatgris/c3po"
-  s.authors          = "chatgris"
+  s.authors          = "af83"
   s.email            = "jboyer@af83.com"
   s.description      = "Ruby translation client"
   s.summary          = "Ruby translation client"
