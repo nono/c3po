@@ -2,6 +2,24 @@
 require 'spec_helper'
 
 describe C3po::Translator::Configuration do
+
+  context 'with several providers' do
+
+    before do
+      C3po.configure do |config|
+        config.provider = [:google, :bing]
+        config.google_api_key = 'MYAPIKEY'
+      end
+      C3po::Translator::Configuration.provider.should_receive(:sample).and_return(:google)
+      C3po.new('to be translated')
+    end
+
+    it 'should have a provider method' do
+      C3po::Translator::Configuration.provider.should eq([:google, :bing])
+    end
+
+  end
+
   context 'google as provider' do
 
     before do

@@ -46,9 +46,13 @@ class C3po
     #
     # Delegates to C3po::Translator::Configuration
     #
+    # config.provider can be an Array. In this case,
+    # provider will be randomly choosen from it.
+    #
     # @example Define the option.
     #   C3po.configure do |config|
     #     config.provider = :google
+    #     config.google_api_key = "MYAPIKEY"
     #   end
     #
     # @param [ Proc ] block The block getting called.
@@ -63,12 +67,12 @@ class C3po
 
   private
 
-  # Choose provider based on configuration
+  # Include provider based on configuration
   #
   # @since 0.0.1
   #
   def select_provider
-    case C3po::Translator::Configuration.provider
+    case provider
     when :google
       @adaptor = Google.new @to_be_translated
     when :bing
@@ -76,6 +80,18 @@ class C3po
     else
       raise NoGivenProvider
     end
+  end
+
+  # Choose provider based on configuration
+  #
+  # If Configuration.provider is an Array,
+  # take a random value from as provider
+  #
+  # @since 0.0.1
+  #
+  def provider
+    provider = Configuration.provider
+    @provider ||= provider.is_a?(Array) ? provider.sample : provider
   end
 
 end # C3po
