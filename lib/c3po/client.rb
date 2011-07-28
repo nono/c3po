@@ -26,7 +26,7 @@ class C3po
       request.on_complete do |response|
         if response.success?
           begin
-            @result = @adaptor.parse response.body
+            @response = @adaptor.parse response.body
           rescue
             @errors << 'Invalid response'
           end
@@ -42,7 +42,7 @@ class C3po
       hydra = Typhoeus::Hydra.hydra
       hydra.queue request
       hydra.run
-      @errors.empty? ? @result : @errors
+      @response if @errors.empty?
     end
 
   end # Client

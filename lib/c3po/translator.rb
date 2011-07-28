@@ -16,7 +16,7 @@ class C3po
     # @since 0.0.1
     #
     def translate(from, to)
-      fetch @adaptor.build_query(from, to)
+      @result.translation ||= fetch @adaptor.build_query(from, to)
     end
 
     # Identify language.
@@ -25,12 +25,12 @@ class C3po
     #   translator = C3po.new('translate')
     #   translator.is
     #
-    # @return [Symbol] the identified language
+    # @return [String] the identified language
     #
     # @since 0.0.1
     #
     def is
-      fetch @adaptor.build_detect_query
+      @result.language ||= fetch @adaptor.build_detect_query
     end
 
     # Check language.

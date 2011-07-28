@@ -6,6 +6,7 @@ class C3po
 
   module Translator
     autoload :Configuration, 'c3po/translator/configuration'
+    autoload :Result,        'c3po/translator/result'
     autoload :Google,        'c3po/translator/google'
     autoload :Bing,          'c3po/translator/bing'
   end
@@ -29,6 +30,7 @@ class C3po
     @to_be_translated = to_be_translated
     select_provider
     @base_url = self.class.base_url
+    @result = C3po::Translator::Result.new
     @errors = []
   end
 

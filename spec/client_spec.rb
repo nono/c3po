@@ -28,7 +28,7 @@ describe C3po do
         end
 
         it 'should translate string' do
-          translator.result.should eq('Hallo Welt')
+          translator.result.translation.should eq('Hallo Welt')
         end
 
         it 'should have no errors' do
@@ -48,7 +48,7 @@ describe C3po do
         end
 
         it 'should detect string' do
-          translator.result.should eq('en')
+          translator.result.language.should eq('en')
         end
 
         it 'should have no errors' do
@@ -101,7 +101,7 @@ describe C3po do
         end
 
         it 'should translate string' do
-          translator.result.should eq("J'aime le café")
+          translator.result.translation.should eq("J'aime le café")
         end
 
         it 'should have no errors' do
@@ -121,7 +121,7 @@ describe C3po do
         end
 
         it 'should detect string' do
-          translator.result.should eq('en')
+          translator.result.language.should eq('en')
         end
 
         it 'should have no errors' do
