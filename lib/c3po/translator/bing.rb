@@ -33,6 +33,11 @@ class C3po
                       })
       end
 
+      def build_languages_query
+        @base_url = 'http://api.microsofttranslator.com/V1/Http.svc/GetLanguages'
+        @default
+      end
+
       # Build a query for detect method of Bing Translate api.
       #
       # @example
@@ -49,6 +54,8 @@ class C3po
 
       # Parse xml response from Bing webservice.
       #
+      # XML is serious business.
+      #
       # @example
       #   parse my_xml
       #
@@ -59,7 +66,9 @@ class C3po
       # @since 0.0.1
       #
       def parse(response)
-        Nokogiri::XML(response).xpath('/').text
+        xpath = Nokogiri::XML(response).xpath('/')
+        return xpath.text unless xpath.children.empty?
+        response.to_s.split("\r\n")
       end
     end #Bing
   end # Translator
