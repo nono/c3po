@@ -6,7 +6,7 @@ class C3po
     class Google
       attr_accessor :base_url
 
-      def initialize(to_be_translated)
+      def initialize(to_be_translated = nil)
         @to_be_translated = to_be_translated
         @default = {
           :key => C3po::Translator::Configuration.google_api_key

@@ -1,6 +1,9 @@
 # encoding: utf-8
 class C3po
 
+  class NoGivenString < Exception; end
+  class NoGivenProvider < Exception; end
+
   autoload :Translator,      'c3po/translator'
   autoload :Client,          'c3po/client'
 
@@ -27,6 +30,7 @@ class C3po
   # @since 0.0.1
   #
   def initialize(to_be_translated = nil)
+    raise NoGivenString if to_be_translated.nil?
     @to_be_translated = to_be_translated
     select_provider
     @base_url = self.class.base_url
@@ -69,6 +73,8 @@ class C3po
       @adaptor = Google.new @to_be_translated
     when :bing
       @adaptor = Bing.new @to_be_translated
+    else
+      raise NoGivenProvider
     end
   end
 

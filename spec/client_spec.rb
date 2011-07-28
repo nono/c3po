@@ -6,6 +6,57 @@ describe C3po do
     defined?(C3po).should be_true
   end
 
+  describe 'Exception' do
+    context C3po::NoGivenString do
+
+      before do
+        C3po.configure do |config|
+          config.provider = :google
+          config.google_api_key = 'MYAPIKEY'
+        end
+      end
+
+      it 'should raise a exception' do
+        lambda {C3po.new}.should raise_error C3po::NoGivenString
+      end
+
+    end
+
+    context C3po::NoGivenProvider do
+
+      context 'when provider is nil' do
+
+        before do
+          C3po.configure do |config|
+            config.provider = nil
+            config.google_api_key = 'MYAPIKEY'
+          end
+        end
+
+        it 'should raise a exception' do
+          lambda {C3po.new('text')}.should raise_error C3po::NoGivenProvider
+        end
+
+      end
+
+      context 'when provider is not registered' do
+
+        before do
+          C3po.configure do |config|
+            config.provider = :af83
+            config.google_api_key = 'MYAPIKEY'
+          end
+        end
+
+        it 'should raise a exception' do
+          lambda {C3po.new('text')}.should raise_error C3po::NoGivenProvider
+        end
+
+      end
+
+    end
+  end
+
   describe 'Request' do
     context 'Google adapter' do
 
