@@ -36,7 +36,7 @@ class C3po
       # Build a query for languages method of Google Translate api.
       #
       # @example
-      #   build_detect_query
+      #   build_languages_query
       #
       # @return [Hash] Hash of param.
       #
