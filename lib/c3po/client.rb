@@ -21,7 +21,7 @@ class C3po
     # @since 0.0.1
     #
     def fetch(query)
-      request = Typhoeus::Request.new @adaptor.base_url, :param => query
+      request = Typhoeus::Request.new @adaptor.base_url, :params => query
 
       request.on_complete do |response|
         if response.success?
