@@ -16,33 +16,62 @@ class C3po
     # @param [Hash] Query containing all the params.
     #
     # @return [String] Translated string.
-    #         [Array]  Errors.
     #
     # @since 0.0.1
     #
     def fetch(query)
-      request = Typhoeus::Request.new @adaptor.base_url, :params => query
-
-      request.on_complete do |response|
-        if response.success?
-          begin
-            @response = @adaptor.parse response.body
-          rescue
-            @errors << 'Invalid response'
-          end
-        elsif response.timed_out?
-          @errors << 'timeout'
-        elsif response.code == 0
-          @errors << response.curl_error_message
-        else
-          @errors << "HTTP request failed: #{response.code}"
-        end
-      end
+      request = set_request query
+      request.on_complete {|response| process_reponse response}
 
       hydra = Typhoeus::Hydra.hydra
       hydra.queue request
       hydra.run
+
       @response if @errors.empty?
+    end
+
+    private
+
+    # Create a Typhoeus request object.
+    #
+    # @example
+    #   set_request {:key => 'MYAPIKEY',
+    #                :q => 'Something to translate'
+    #               }
+    #
+    # @param [Hash] Query containing all the params.
+    #
+    # @return [Typhoeus::Request] Translated string.
+    #
+    # @since 0.0.1
+    #
+    def set_request(query)
+      Typhoeus::Request.new @adaptor.base_url, :params => query
+    end
+
+    # Process response.
+    #
+    # @example
+    #   process_reponse response
+    #
+    # @param [Typhoeus::Response] Typhoeus response object.
+    #
+    # @return [Typhoeus::Request] Translated string.
+    #
+    # @since 0.0.1
+    #
+    def process_reponse(response)
+      if response.success?
+        begin
+          @response = @adaptor.parse response.body
+        rescue
+          @errors << 'Invalid response'
+        end
+      elsif response.timed_out?
+        @errors << 'timeout'
+      else
+        @errors << "HTTP request failed: #{response.code}"
+      end
     end
 
   end # Client
