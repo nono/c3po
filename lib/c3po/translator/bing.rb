@@ -15,13 +15,13 @@ class C3po
 
       # Build a query for the Bing Translate api.
       #
-      # @exemple :
+      # @example
       #   build_query :fr, :en
       #
-      # @params [Symbol] Language to be translated from.
+      # @param [Symbol] Language to be translated from.
       #         [Symbol] Language to be translated to.
       #
-      # @return [Hash] Hash of params.
+      # @return [Hash] Hash of param.
       #
       # @since 0.0.1
       #
@@ -35,10 +35,10 @@ class C3po
 
       # Build a query for detect method of Bing Translate api.
       #
-      # @exemple :
+      # @example
       #   build_detect_query
       #
-      # @return [Hash] Hash of params.
+      # @return [Hash] Hash of param.
       #
       # @since 0.0.1
       #
@@ -49,10 +49,10 @@ class C3po
 
       # Parse xml response from Bing webservice.
       #
-      # @exemple :
+      # @example
       #   parse my_xml
       #
-      # @params [String] response Json representation
+      # @param [String] response Json representation
       #
       # @return [String] Translated string.
       #

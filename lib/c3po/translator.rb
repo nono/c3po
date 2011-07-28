@@ -4,7 +4,7 @@ class C3po
 
     # Translate a string.
     #
-    # @example :
+    # @example
     #   translator = C3po.new('translate')
     #   translator.translate(:en, :fr)
     #
@@ -21,7 +21,7 @@ class C3po
 
     # Identify language.
     #
-    # @example :
+    # @example
     #   translator = C3po.new('translate')
     #   translator.is
     #
@@ -35,7 +35,7 @@ class C3po
 
     # Check language.
     #
-    # @example :
+    # @example
     #   translator = C3po.new('translate')
     #   translator.is? :fr
     #

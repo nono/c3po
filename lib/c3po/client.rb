@@ -8,12 +8,12 @@ class C3po
     #
     # Returns a translated string or an array of errors.
     #
-    # @exemple :
+    # @example
     #   fetch {:key => 'MYAPIKEY',
     #          :q => 'Something to translate'
     #         }
     #
-    # @params [Hash] Query containing all the params.
+    # @param [Hash] Query containing all the params.
     #
     # @return [String] Translated string.
     #         [Array]  Errors.
@@ -21,7 +21,7 @@ class C3po
     # @since 0.0.1
     #
     def fetch(query)
-      request = Typhoeus::Request.new @adaptor.base_url, :params => query
+      request = Typhoeus::Request.new @adaptor.base_url, :param => query
 
       request.on_complete do |response|
         if response.success?

@@ -21,7 +21,7 @@ class C3po
 
   # Define a translator object.
   #
-  # @example :
+  # @example
   #   translator = C3po.new('to be translated')
   #   translator.translate(:fr, :en)
   #
