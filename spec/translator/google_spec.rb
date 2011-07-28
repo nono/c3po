@@ -5,6 +5,7 @@ describe C3po::Translator::Google do
   let(:translator) { C3po.new('to be translated')}
   let(:json_response) {File.open(file_path('multiple.json')).read}
   let(:json_detect_response) {File.open(file_path('auto_detect.json')).read}
+  let(:json_languages_response) {File.open(file_path('languages.json')).read}
 
   before do
     C3po.configure do |config|
@@ -25,7 +26,11 @@ describe C3po::Translator::Google do
     translator.adaptor.parse(json_response).should eq('Hallo Welt')
   end
 
-  it 'should read json iauto_detect response' do
+  it 'should read json auto_detect response' do
     translator.adaptor.parse(json_detect_response).should eq('en')
+  end
+
+  it 'should read json languages response' do
+    translator.adaptor.parse(json_languages_response).should eq(["af", "zh-TW"])
   end
 end

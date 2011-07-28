@@ -67,6 +67,26 @@ describe C3po do
         end
       end
 
+      describe 'request languages list' do
+        let(:uri) {'https://www.googleapis.com/language/translate/v2/languages'}
+        let(:query) {{:key=>"MYAPIKEY"}}
+        let(:translator) {C3po.new('to be translated')}
+        let(:json_response) {File.open(file_path('languages.json')).read}
+
+        before do
+          request_helper(uri, query, json_response)
+          translator.languages
+        end
+
+        it 'should translate string' do
+          translator.result.languages.should eq(["af", "zh-TW"])
+        end
+
+        it 'should have no errors' do
+          translator.errors.should be_empty
+        end
+      end
+
       describe 'request a translation' do
         let(:uri) {'https://www.googleapis.com/language/translate/v2'}
         let(:translator) {C3po.new('to be translated')}

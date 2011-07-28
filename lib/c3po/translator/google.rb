@@ -33,6 +33,20 @@ class C3po
                       })
       end
 
+      # Build a query for languages method of Google Translate api.
+      #
+      # @example
+      #   build_detect_query
+      #
+      # @return [Hash] Hash of param.
+      #
+      # @since 0.0.1
+      #
+      def build_languages_query
+        @base_url = 'https://www.googleapis.com/language/translate/v2/languages'
+        @default
+      end
+
       # Build a query for detect method of Google Translate api.
       #
       # @example
@@ -55,6 +69,8 @@ class C3po
       # @param [String] response Json representation
       #
       # @return [String] Translated string.
+      # @return [String] Detected language.
+      # @return [Array]  Languages list.
       #
       # @since 0.0.1
       #
@@ -64,6 +80,8 @@ class C3po
           data['translations'][0]['translatedText']
         elsif data['detections']
           data['detections'][0][0]["language"]
+        else
+          data['languages'].inject([]) {|languages, value| languages << value['language']}
         end
       end
 

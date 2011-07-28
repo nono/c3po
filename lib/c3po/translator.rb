@@ -19,6 +19,20 @@ class C3po
       @result.translation ||= fetch @adaptor.build_query(from, to)
     end
 
+    # Grab languages list from provider.
+    #
+    # @example
+    #   translator = C3po.new('translate')
+    #   translator.languages
+    #
+    # @return [Array] the languages list
+    #
+    # @since 0.0.1
+    #
+    def languages
+      @result.languages ||= fetch @adaptor.build_languages_query
+    end
+
     # Identify language.
     #
     # @example
