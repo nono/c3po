@@ -20,17 +20,13 @@ describe C3po::Translator::Configuration do
 
   end
 
-  context 'google as provider' do
+  context 'with google as provider' do
 
     before do
       C3po.configure do |config|
         config.provider = :google
         config.google_api_key = 'MYAPIKEY'
       end
-    end
-
-    it 'Configuration should be autoload' do
-      defined?(C3po::Translator::Configuration).should be_true
     end
 
     it 'should respond_to configure' do
@@ -46,17 +42,13 @@ describe C3po::Translator::Configuration do
     end
   end
 
-  context 'bing as provider' do
+  context 'with bing as provider' do
 
     before do
       C3po.configure do |config|
         config.provider = :bing
         config.google_api_key = 'MYAPIKEY'
       end
-    end
-
-    it 'Configuration should be autoload' do
-      defined?(C3po::Translator::Configuration).should be_true
     end
 
     it 'should respond_to configure' do
