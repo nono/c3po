@@ -17,7 +17,7 @@ class C3po
   include Client
   include C3po::Translator
 
-  attr_accessor :base_url, :to_be_translated, :errors, :result, :adaptor
+  attr_reader :base_url, :to_be_translated, :errors, :result, :adaptor
 
   # Define a translator object.
   #

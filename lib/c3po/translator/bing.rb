@@ -4,7 +4,7 @@ require 'nokogiri'
 class C3po
   module Translator
     class Bing
-      attr_accessor :base_url
+      attr_reader :base_url
 
       def initialize(to_be_translated)
         @to_be_translated = to_be_translated

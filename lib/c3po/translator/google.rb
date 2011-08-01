@@ -4,7 +4,7 @@ require 'yajl'
 class C3po
   module Translator
     class Google
-      attr_accessor :base_url
+      attr_reader :base_url
 
       def initialize(to_be_translated = nil)
         @to_be_translated = to_be_translated
