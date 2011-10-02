@@ -1,15 +1,18 @@
+# encoding: utf-8
+
+$:.unshift File.expand_path('../lib', __FILE__)
+require 'c3po/version'
+
 Gem::Specification.new do |s|
-  s.name             = "c3po"
-  s.version          = "0.1.0"
-  s.date             = Time.now.utc.strftime("%Y-%m-%d")
-  s.authors          = "af83"
-  s.email            = "jboyer@af83.com"
-  s.description      = "Ruby translation client"
-  s.summary          = "Ruby translation client"
-  s.extra_rdoc_files = %w(README.md)
-  s.files            = Dir["LICENSE", "README.md", "Gemfile", "lib/**/*.rb", "init.rb"]
-  s.require_paths    = ["lib"]
-  s.rubygems_version = %q{1.8.3}
+  s.name         = "c3po"
+  s.version      = C3po::VERSION
+  s.authors      = ["af83"]
+  s.email        = "jboyer@af83.com"
+  s.description  = "Ruby translation client"
+  s.summary      = "Ruby translation client"
+  s.files        = `git ls-files app lib Gemfile`.split("\n")
+  s.platform     = Gem::Platform::RUBY
+  s.require_path = 'lib'
   s.add_development_dependency "rspec", "~>2.6"
   s.add_dependency "typhoeus", "~>0.2.4"
   s.add_dependency "nokogiri", "~>1.5.0"
