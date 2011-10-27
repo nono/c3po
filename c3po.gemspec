@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.email        = "jboyer@af83.com"
   s.description  = "Ruby translation client"
   s.summary      = "Ruby translation client"
-  s.files        = `git ls-files app lib Gemfile`.split("\n")
+  s.files        = `git ls-files lib LICENSE README.md`.split("\n")
   s.platform     = Gem::Platform::RUBY
   s.require_path = 'lib'
   s.add_development_dependency "rspec", "~>2.6"
